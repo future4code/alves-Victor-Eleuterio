@@ -1,0 +1,22 @@
+.box-1{
+    background-color: violet;
+}
+.espaco{
+    margin-left: 7.5%;
+    margin-right: 7.5%;
+    color: black;
+}
+.espaco2{
+    margin-top: 1% ;
+}
+.tabela-de-produtos{
+    margin-left: 20%;
+    margin-right: 9%;
+    color: black;
+}
+
+.iconeLoja{
+    margin-right: 90%;
+    height: 100;
+    display: inline-block;
+}

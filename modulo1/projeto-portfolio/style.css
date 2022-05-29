@@ -1,4 +1,8 @@
-body {
+#fundo-galeria {
+    background-color: antiquewhite;
+}
+
+#body-index {
     background-image: url(./img/background.png);
     background-repeat: no-repeat;
     margin: 0%;
@@ -6,21 +10,43 @@ body {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
+#body-projetos {
+    margin: 0%;
+    background-color: rgb(215, 215, 215);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+
+#body-contato {
+    padding-top: 100px;
+    margin: 0%;
+    background-color: rgb(215, 215, 215);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+.links:active {
+    color: white;
+}
+
 .barra-de-contato {
     background-color: rgb(2, 2, 38);
     color: white;
-    padding: 10px;
-    display: flex;
+    display: block;
+    padding-top: 10px;
     padding-left: 50px;
+    padding-bottom: 5px;
     position: absolute;
-    width: 95.5%;
+    width: 96.3%;
     left: 0;
     top: 0;
     text-align: center;
 }
 
-.links {
-    text-align: center;
+a {
+    color: rgb(76, 57, 174);
+    display: inline;
+    font-size: 20px;
+    padding-left: 15px;
 }
 
 h2 {
@@ -29,9 +55,157 @@ h2 {
     font-size: 25px;
 }
 
+#contato{
+    background-color: rgba(0, 0, 255, 0.19);
+    border-radius: 15px;
+    box-shadow: 10px 5px 5px rgba(7, 2, 70, 0.782);
+    font-size: 20px;
+    margin-right:25% ;
+    margin-left: 25%;
+    margin-bottom: 127px;
+    padding: 10px;
+    text-align: left;
+
+    
+}
+
+fieldset{
+    border-radius:  10px;
+    border-color: rgba(7, 2, 70, 0.782);
+
+}
+
+input{
+    border-radius:  10px;
+    border-color: rgba(7, 2, 70, 0.782);
+    width: 300px;
+}
+
+textarea{
+    border-radius: 10px;
+    border-color: rgba(7, 2, 70, 0.782);
+    width: 500px;
+    height: 100px;
+
+}
+
 .principal {
     margin: 90px 40px 20px 50%;
     font-size: 20px;
+    background-color: rgba(0, 0, 255, 0.19);
+    box-shadow: 10px 5px 5px rgba(7, 2, 70, 0.782);
+    border-radius: 15px;
+    text-align: center;
+    display: inline-block;
+}
+
+#habilidades{
+    background-color: rgba(0, 0, 255, 0.19);
+    border-radius: 15px;
+    box-shadow: 10px 5px 5px rgba(7, 2, 70, 0.782);
+    font-size: 20px;
+    margin-right:50% ;
+    margin-left: 40px;
+    margin-bottom: 40px;
+    padding: 10px;
+    text-align: left;
+}
+
+#habilidades-tecnicas{
+    background-color: rgba(0, 0, 255, 0.19);
+    border-radius: 15px;
+    box-shadow: 10px 5px 5px rgba(7, 2, 70, 0.782);
+    font-size: 20px;
+    margin-left:50% ;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    padding: 10px;
+    text-align: left;
+}
+
+#habilidades-comportamentais{
+    background-color: rgba(0, 0, 255, 0.19);
+    border-radius: 15px;
+    box-shadow: 10px 5px 5px rgba(7, 2, 70, 0.782);
+    font-size: 20px;
+    margin-right:50% ;
+    margin-left: 40px;
+    margin-bottom: 40px;
+    padding: 10px;
+    text-align: left;
+}
+
+.galeria {
+    background-color: rgba(0, 0, 255, 0.19);
+    border-radius: 10px;
+    text-align: center;
+    color: rgb(28, 28, 29);
+    padding: 3px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.janela-galeria {
+    background-color: rgb(255, 255, 255);
+    margin-left: 220px;
+    margin-right: 200px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 15px
+}
+
+#sanfona {
+    width: 800px;
+    height: 500px;
+    overflow: hidden;
+    box-shadow: 0 0 10px 1px rgba(2, 2, 38, 0.523);
+    border-radius: 5px;
+
+}
+
+#sanfona ul {
+    width: 2000px;
+}
+
+#sanfona li {
+    position: relative;
+    display: block;
+    width: 150px;
+    float: left;
+    border-left: 1px solid white;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+}
+
+#sanfona ul:hover li {
+    width: 40px;
+}
+
+#sanfona ul li:hover {
+    width: 640px;
+}
+
+#sanfona li img {
+    display: block;
+}
+
+button {
+    border: 0;
+    border-radius: 7px;
+    padding: 10px;
+    background-color: rgb(2, 2, 38);
+    color: gray;
+
+}
+
+button:hover {
+    background-color: rgba(2, 2, 38, 0.819);
+    color: rgb(1, 1, 12);
+}
+
+button:active {
+    background-color: rgba(0, 0, 255, 0.19);
+    color: rgb(1, 1, 12);
 }
 
 footer {
@@ -43,4 +217,17 @@ footer {
     bottom: 0;
     left: 0;
     text-align: center;
+    margin-top: 50px;
+}
+
+#tabela-rodape {
+    background-color: rgb(2, 2, 38);
+    color: gray;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    padding-left: 40px;
+    padding-top: 10px;
 }

@@ -5,15 +5,12 @@ import axios from "axios"
 
 export default class Inicial extends Component {
     state = {
-        usuarios: [],
-        erro:"",
+        erro: "",
         name: "",
         email: ""
     }
 
-    // componentDidMount() {
-    //     this.pegarUsuario()
-    // }
+
 
     onChangeInputNome = (event) => {
         this.setState({ name: event.target.value })
@@ -22,32 +19,23 @@ export default class Inicial extends Component {
         this.setState({ email: event.target.value })
     }
 
-    pegarUsuarios = () => {
-        axios.get(
-            "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users",{
-                headers: {
-                    Authorization: "victor-eleuterio-alves"
-                }
-            }
-        ).then((resposta) => {
-            this.setState({usuarios: resposta.data.results.list})
-        }).catch((erro) => {
-            this.setState({erro: erro.response.data})
-        })
-    }
 
     adicionarUsuario = () => {
-    
+        const body = {
+            name: this.state.name,
+            email: this.state.email
+        }
 
         axios.post(
             "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users",
-            this.state.usuarios, {
+            body, {
             headers: {
                 Authorization: "victor-eleuterio-alves"
             }
         }
         ).then((resposta) => {
-            resposta.status === 200 && alert("O usuário foi adicionado com sucesso!")
+            alert("O usuário foi adicionado com sucesso!")
+            this.setState({ name: '', email: '' })
 
 
         }).catch((erro) => {
@@ -62,18 +50,20 @@ export default class Inicial extends Component {
                 <div>
                     <input
                         placeholder='Nome:'
+                        value={this.state.name}
                         onChange={this.onChangeInputNome}
                     ></input>
                 </div>
                 <div>
                     <input
                         placeholder='E-mail:'
+                        value={this.state.email}
                         onChange={this.onChangeInputEmail}
 
                     ></input>
                 </div>
                 <button
-
+                    onClick={this.adicionarUsuario}
                 >Criar Usuário</button>
             </DivPrincipal>
         )

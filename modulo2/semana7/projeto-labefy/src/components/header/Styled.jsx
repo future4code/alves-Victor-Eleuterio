@@ -21,7 +21,16 @@ export const DivImg = styled.div`
 
 export const DivLogin = styled.div`
     display: flex;
+    gap: 10px;
     align-items: center;
+    border-radius: 50px;
+    background-color: #13171a;
+    padding-left: 8px;
+    padding-right: 8px;
+    &:hover{
+    background-color: #242a2f;
+    }
+    
 `
 export const ButtonStyled = styled.button`
     border-radius: 50px;

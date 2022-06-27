@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Header } from "../../components/header/Header";
-import { DivPrincipal } from "./Styled";
+import { DivCadastro } from "./Styled";
 import { BoxLogin } from "./Styled";
 import { BoxCadastro } from "./Styled";
 import { InputStyled } from "./Styled";
 import { ButonStyled } from "./Styled";
 import axios from "axios";
 
-export class Login extends Component {
+export class Cadastro extends Component {
     state = {
         usuario: '',
         email: '',
@@ -49,44 +49,13 @@ export class Login extends Component {
         this.setState({ tela: "login" })
     }
 
-    verificarUsuario = () => {
-        axios.get(
-            "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/search?name=&email=",{
-                headers: {
-                    Authorization: "victor-eleuterio-alves"
-                }
-            }
-        )
-    }
 
-    trocarTela = () => {
-        if (this.state.tela === "login") {
-            return (
-                <BoxLogin>
-                    <div>
-                        <h3>Faça Login em sua conta</h3>
-                    </div>
-                    <div>
-                        <InputStyled
-                            placeholder="Usuário"
-                            onChange={this.pegarUsuario}
-                        />
-                    </div>
-                    <div>
-                        <InputStyled
-                            type="password"
-                            placeholder="Senha"
-                        />
-                    </div>
-                    <div>
-                        <ButonStyled
-                            onClick={this.adicionarUsuario}
-                        >Entrar</ButonStyled>
-                    </div>
-                </BoxLogin>
-            )
-        } else {
-            return (
+
+
+
+    render() {
+        return (
+            <DivCadastro>
                 <BoxCadastro>
                     <div>
                         <h3>Cadastre sua conta</h3>
@@ -121,17 +90,8 @@ export class Login extends Component {
                         >Cadastrar</ButonStyled>
                     </div>
                 </BoxCadastro>
-            )
-        }
-    }
-
-
-
-    render() {
-        return (
-            <DivPrincipal>
-                {this.trocarTela()}
-            </DivPrincipal>
+                {/* {this.trocarTela()} */}
+            </DivCadastro>
         )
     }
 }

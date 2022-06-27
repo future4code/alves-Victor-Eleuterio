@@ -6,7 +6,7 @@ import { DivImg } from "./Styled";
 import IconLogin from "../../assets/IconLogin.png"
 import { DivLogin } from "./Styled"
 import { ButtonStyled } from "./Styled"
-import { Login } from "../../pages/login/Login";
+import { Login } from "../login/Login";
 import axios from 'axios'
 
 
@@ -33,12 +33,12 @@ export class Header extends Component {
             this.setState({ erro: erro.response.data })
         })
     }
-    
-    pegarNomeUsuario = () => {
-        this.state.usuario.map((user) => {
-            this.setState({nome: user.name})
-        })
-    }
+
+    // pegarNomeUsuario = () => {
+    //     this.state.usuario.map((user) => {
+    //         this.setState({nome: user.name})
+    //     })
+    // }
 
     render() {
 
@@ -55,7 +55,9 @@ export class Header extends Component {
                     >Seja Premium</ButtonStyled>
                 </div>
                 <DivLogin>
-                    <img src={IconLogin} /><h4>{this.state.nome}</h4>
+                    <div><img src={IconLogin} /></div>
+                    <div><h4>{this.props.usuario}</h4></div>
+
                 </DivLogin>
             </DivPrincipal>
         )

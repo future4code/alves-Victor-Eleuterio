@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 
-export const DivPrincipal = styled.div`
+export const DivCadastro = styled.div`
     text-align: center;
     background-color: #1e2428;
     margin-top:5%;
@@ -31,6 +31,7 @@ export const BoxCadastro = styled.div`
 
 export const InputStyled = styled.input`
     border: 0;
+    width: 280px;
     border-radius: 3px;
     padding: 10px;
     background-color: #636363;

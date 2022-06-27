@@ -17,8 +17,7 @@ import { DivCadastro } from './components/cadastro/Styled'
 
 const LayoutMain = styled.div`
   display: grid;
-  /* grid-template-columns: 15% 85%; */
-  height: 80.1vh;
+  height:90vh;
   background-color: #0d0f11;
 `
 
@@ -161,7 +160,7 @@ export default class App extends Component {
             {this.trocarTelaLogin()}
           </div>
         </LayoutMain>
-        <Footer />
+        {/* <Footer /> */}
       </div>
 
     )

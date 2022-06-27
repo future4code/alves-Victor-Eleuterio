@@ -12,18 +12,27 @@ import { ImgStyled } from "./Styled";
 import MusicIcon from "../../assets/MusicIcon.png"
 import { DivPlaylists } from "./Styled";
 import { DivPlaylistPrincipal } from "./Styled";
+import { ButtonStyled } from "./Styled";
+import { InputStyled } from "./Styled";
+import { DivNav } from "./Styled";
+import { AudioStyled } from "./Styled";
+import { Aviso } from "./Styled";
+import { DivMusica } from "./Styled";
+import { DivMusicas } from "./Styled";
+
 
 export default class Home extends Component {
     state = {
         playlists: [],
         musicas: [],
         tela: "lista",
-        telaHome: "",
+        telaHome: "home",
         nomePlaylist: "",
         playlistId: '',
         nomeMusica: '',
         artista: '',
         url: '',
+        urlPlayer: ''
     }
 
     componentDidUpdate() {
@@ -114,7 +123,7 @@ export default class Home extends Component {
         }
         ).then(() => {
             this.setState({ nomeMusica: "", url: "", artista: "" })
-            alert('musica adicionada com sucesso!')
+            alert('Música adicionada com sucesso!')
         }).catch((erro) => {
             alert('Ocorreu um erro, tente novamente', erro.response.data.message)
 
@@ -162,32 +171,32 @@ export default class Home extends Component {
         switch (this.state.tela) {
             case "addPlaylist":
                 return (
-                    <div>
-                        <button
+                    <DivNav>
+                        <ButtonStyled
                             onClick={this.botaoVoltar}
-                        >Voltar</button>
-                        <input
+                        >Voltar</ButtonStyled>
+                        <InputStyled
                             placeholder='Digite o nome da sua playlist'
                             onChange={this.pegarPlaylist}
-                        ></input>
-                        <button
+                        ></InputStyled>
+                        <ButtonStyled
                             onClick={this.adicionarPlaylist}
-                        >Adicionar Playlist</button>
+                        >Adicionar Playlist</ButtonStyled>
 
-                    </div>
+                    </DivNav>
                 );
             case "suasPlaylists":
                 return (
                     <div>
-                        <button
+                        <ButtonStyled
                             onClick={this.botaoVoltar}
-                        >Voltar</button>
+                        >Voltar</ButtonStyled>
                         <ul>
 
                             {this.state.playlists.map((playlist) => {
-                                return <button
+                                return <ButtonStyled
                                     onClick={this.imprimirPlaylist}
-                                ><li key={playlist.id}>{playlist.name}</li></button>
+                                ><li key={playlist.id}>{playlist.name}</li></ButtonStyled>
                             })}
 
                         </ul>
@@ -204,33 +213,19 @@ export default class Home extends Component {
 
     listaDeOpcoes = () => {
         return (
-            <div>
-                <button
+            <DivNav>
+                <ButtonStyled
                     onClick={this.listaAddPlaylist}
-                >Adicionar Playlist</button>
-                <button
+                >Adicionar Playlist</ButtonStyled>
+                <ButtonStyled
                     onClick={this.listaSuasPlaylists}
-                >Suas Playlists</button>
+                >Suas Playlists</ButtonStyled>
 
-            </div>
+            </DivNav>
         )
 
     }
 
-    Card = () => {
-        return (
-            <DivCard >
-                <ImgStyled
-                    src={MusicIcon}
-                    alt='Imagem da musica/artista'
-                />
-                <h3>Nome:</h3>
-                <h4>Artista:</h4>
-                <button>Tocar</button>
-                <button>Remover Musica</button>
-            </DivCard>
-        )
-    }
 
     musicaPlaylist = () => {
         this.setState({ telaHome: "addmusica" })
@@ -239,17 +234,18 @@ export default class Home extends Component {
 
     pegarMusica = (event) => {
         this.setState({ nomeMusica: event.target.value })
-        console.log(this.state.nomeMusica)
     }
 
     pegarArtista = (event) => {
         this.setState({ artista: event.target.value })
-        console.log(this.state.artista)
     }
 
     pegarUrl = (event) => {
         this.setState({ url: event.target.value })
-        console.log(this.state.url)
+    }
+
+    tocarMusica = (id) => {
+        this.setState({ urlPlayer: id })
     }
 
     telaHome = () => {
@@ -263,12 +259,12 @@ export default class Home extends Component {
                                 <DivPlaylists
                                     key={playlist.id}>{playlist.name}
 
-                                    <button
+                                    <ButtonStyled
                                         onClick={() => this.getPlaylistTracks(playlist.id, playlist.name)}
-                                    >Visualizar</button>
-                                    <button
+                                    >Visualizar</ButtonStyled>
+                                    <ButtonStyled
                                         onClick={() => { this.deletePlaylist(playlist.id) }}
-                                    >Deletar Playlist</button>
+                                    >Deletar Playlist</ButtonStyled>
 
 
                                 </DivPlaylists>
@@ -280,38 +276,38 @@ export default class Home extends Component {
             case 'addmusica':
                 return (
                     <div>
-                        <button
+                        <ButtonStyled
                             onClick={this.listaSuasPlaylists}
-                        >Voltar</button>
-                        <input
+                        >Voltar</ButtonStyled>
+                        <InputStyled
                             onChange={this.pegarMusica}
                             placeholder="Nome da música"
-                        ></input>
-                        <input
+                        ></InputStyled>
+                        <InputStyled
                             onChange={this.pegarArtista}
                             placeholder="Artista"
-                        ></input>
-                        <input
+                        ></InputStyled>
+                        <InputStyled
                             onChange={this.pegarUrl}
                             placeholder="Endereço URL da música"
-                        ></input>
-                        <button
+                        ></InputStyled>
+                        <ButtonStyled
                             onClick={() => this.addTrackToPlayList(this.state.playlistId)}
-                        >Adicionar</button>
+                        >Adicionar</ButtonStyled>
                     </div>
                 );
             case "infoplaylist":
                 return (
 
                     <div>
-                        <button
+                        <ButtonStyled
                             onClick={this.musicaPlaylist}
-                        >Adicionar Música</button>
+                        >Adicionar Música</ButtonStyled>
                         <div>
                             {this.state.musicas.map((musica) => {
                                 return (
 
-                                    <div key={musica.id}>
+                                    <DivMusica key={musica.id}>
                                         <div><img
                                             src={MusicIcon}
                                         />
@@ -322,16 +318,41 @@ export default class Home extends Component {
                                         <div>
                                             {musica.artist}
                                         </div>
-                                        <button
-                                        onClick={()=>this.removeTrackFromPlaylist(musica.id)}
-                                        >Deletar música</button>
-                                    </div>
+                                        <ButtonStyled
+                                            onClick={() => { this.tocarMusica(musica.url) }}
+                                        >Play</ButtonStyled>
+                                        <ButtonStyled
+                                            onClick={() => this.removeTrackFromPlaylist(musica.id)}
+                                        >Deletar música</ButtonStyled>
+                                    </DivMusica>
 
                                 )
                             })}
                         </div>
                     </div>
                 );
+            case "home":
+                return (
+                    <Aviso>
+                        {this.state.musicas.map((musica)=> {
+                            return(
+                                <DivCard key="9de0c1c3-b972-41e9-8e9a-e54c359b9d92">
+                                    <ImgStyled
+                                        src={MusicIcon}
+                                        alt='Imagem da musica/artista'
+                                    />
+                                    <h3>{musica.name}</h3>
+                                    <h4>{musica.artist}</h4>
+                                    <ButtonStyled>Tocar</ButtonStyled>
+                                    <ButtonStyled>Remover Musica</ButtonStyled>
+                                </DivCard>
+                            )
+                        })}
+                        <h1>Página Home em reforma, pedimos desculpas pelo trasntorno 😕</h1>
+                        <h4>Mas você ainda pode usar a ferramenta de adicionar novas playlists e visualiza-las na página Suas Playlists 😉</h4>
+                    </Aviso>
+
+                )
         }
     }
 
@@ -345,9 +366,7 @@ export default class Home extends Component {
                     {this.trocarTela()}
                 </DivPrincipalNav>
                 <DivSecundaria>
-                    <DivCards>
-                        {this.telaHome()}
-                    </DivCards>
+                    {this.telaHome()}
                 </DivSecundaria>
 
             </DivPrincipal>

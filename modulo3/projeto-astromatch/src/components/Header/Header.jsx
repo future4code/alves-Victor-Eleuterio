@@ -1,16 +1,20 @@
 import React from 'react'
-import { useState } from 'react'
+import Name from '../../assets/nome.png'
+import { DivPrincipal } from './styled'
 
 export default function Header(props) {
-  const [botao, setBotao] = useState(true)
   return (
-    <div>
-      <div><h1>Astromatch</h1></div>
+    <DivPrincipal>
+      <div>
+        <img 
+        src={Name}
+        />
+      </div>
       <div>
         <button
-        onClick={props.mudarTela}
+          onClick={props.mudarTela}
         >Ir para Matches</button>
       </div>
-    </div>
+    </DivPrincipal>
   )
 }

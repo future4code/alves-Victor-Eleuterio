@@ -2,82 +2,91 @@ import axios from 'axios'
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import { URL } from '../../contants/contants'
+import { DivPrincipal } from './styled'
 
 export default function Perfil() {
-    const [perfil, setPerfil] = useState([])
-    const [proximo, setProximo] = useState("")
-    const [like, setLike] = useState(true)
+    const [perfil, setPerfil] = useState({})
 
     useEffect(() => {
         GetProfileToChoose()
-    }, [proximo])
+    }, [])
 
     const GetProfileToChoose = () => {
         axios.get(
-            'https://us-central1-missao-newton.cloudfunctions.net/astroMatch/victor-eleuterio-alves/person'
+            `${URL}/person`
         ).then((resposta) => {
-            setPerfil([resposta.data.profile])
+            setPerfil(resposta.data.profile)
         }).catch((erro) => {
             console.log(erro.response)
         })
     }
-    const ChoosePerson = () => {
-        
-        const idPerfil = perfil.map((info)=>{
-            return(info.id.toString())
-        })
+    const ChoosePerson = (id) => {
         const body = {
-            "id": idPerfil,
-            "choise": like
+            "id": id,
+            "choice": true
         }
         axios.post(
-            'https://us-central1-missao-newton.cloudfunctions.net/astroMatch/victor-eleuterio-alves/choose-person',
-            body,{
-                headers:{
-                    "Content-Type" : "application/json",
-                }
+            `${URL}/choose-person`,
+            body, {
+            headers: {
+                "Content-Type": "application/json",
             }
-        ).then(() => {
-            setLike(true)
-            alert("AEEEEEE")
+        }
+        ).then((resposta) => {
+            if (resposta.data.isMatch) {
+                alert("Deu match!")
+            }
+            GetProfileToChoose()
         }).catch((erro) => {
-            console.log(erro.response)
+            alert("Ocorreu um erro, tente novamente", erro.response)
         })
     }
-
-    const botaoLike = () => {
-        setLike(true)
+    const Clear = () => {
+        axios.put(
+            `${URL}/clear`
+        ).then((resposta) => {
+            alert("Perfis resetados com sucesso!")
+            GetProfileToChoose()
+        }).catch((erro) => {
+            alert("OCorreu um erro, tente novamente", erro.response)
+        })
     }
-    const botaoDislike = () => {
-        setLike(false)
-    }
-    const cardPerfil = perfil.map((perfil) => {
-        return (
-            <div key={perfil.id}>
-                <img
-                    alt={perfil.photo_alt}
-                    src={perfil.photo}
-                    width='250px'
-                    height='350px'
-                />
-                <h4>{perfil.name}, {perfil.age}</h4>
-                <h5>{perfil.bio}</h5>
-            </div>
-        )
-    })
     return (
-        <div>
-            <h2>Perfil</h2>
-            {cardPerfil}
-            <button
-                onClick={GetProfileToChoose}
-            >Próximo</button>
-            {/* <button
-                onClick={GetProfileToChoose}
-            >Dislike</button>
-            <button
-                onClick={ChoosePerson}
-            >Like</button> */}
-        </div>
+        <DivPrincipal>
+            {perfil ? (
+                <div key={perfil.id}>
+                    <img
+                        alt={perfil.photo_alt}
+                        src={perfil.photo}
+                        width='150px'
+                        height='250px'
+                    />
+                    <h4>{perfil.name}, {perfil.age}</h4>
+                    <h5>{perfil.bio}</h5>
+                    <div>
+                        <button
+                            onClick={GetProfileToChoose}
+                        >Dislike</button>
+                        <button
+                            onClick={() => ChoosePerson(perfil.id)}
+                        >Like</button>
+                    </div>
+                </div>
+            )
+                :
+                (
+                    <div>
+                        <h3>Você já viu todos os perfis 😊</h3>
+                        <h4>Clique no botão abaixo para recomeçar</h4>
+                        <button
+                            onClick={Clear}
+                        >Resetar Perfis</button>
+                    </div>
+                )
+            }
+
+
+        </DivPrincipal>
     )
 }

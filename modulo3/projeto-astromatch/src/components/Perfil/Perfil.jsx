@@ -3,7 +3,7 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { URL } from '../../contants/contants'
-import { DivPrincipal } from './styled'
+import { ImgPerfil, DivImg, DivNome, DivBio, BotaoLike, BotaoDislike, DivPerfil, DivPrincipal, DivBotoes } from './styled'
 
 export default function Perfil() {
     const [perfil, setPerfil] = useState({})
@@ -55,24 +55,32 @@ export default function Perfil() {
     return (
         <DivPrincipal>
             {perfil ? (
-                <div key={perfil.id}>
-                    <img
-                        alt={perfil.photo_alt}
-                        src={perfil.photo}
-                        width='150px'
-                        height='250px'
-                    />
-                    <h4>{perfil.name}, {perfil.age}</h4>
-                    <h5>{perfil.bio}</h5>
-                    <div>
-                        <button
-                            onClick={GetProfileToChoose}
-                        >Dislike</button>
-                        <button
-                            onClick={() => ChoosePerson(perfil.id)}
-                        >Like</button>
-                    </div>
-                </div>
+                <DivPerfil key={perfil.id}>
+                    <DivImg>
+                        <ImgPerfil
+                            alt={perfil.photo_alt}
+                            src={perfil.photo}
+                        />
+                    </DivImg>
+                    <DivNome>
+                        <h4>{perfil.name}, {perfil.age}</h4>
+                    </DivNome>
+                    <DivBio>
+                        <h5>{perfil.bio}</h5>
+                    </DivBio>
+                    <DivBotoes>
+                        <div>
+                            <BotaoDislike
+                                onClick={GetProfileToChoose}
+                            >✖</BotaoDislike>
+                        </div>
+                        <div>
+                            <BotaoLike
+                                onClick={() => ChoosePerson(perfil.id)}
+                            >❤</BotaoLike>
+                        </div>
+                    </DivBotoes>
+                </DivPerfil>
             )
                 :
                 (

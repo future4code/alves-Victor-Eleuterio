@@ -13,7 +13,7 @@ export default function Header(props) {
       <div>
         <button
           onClick={props.mudarTela}
-        >Ir para Matches</button>
+        >💕</button>
       </div>
     </DivPrincipal>
   )

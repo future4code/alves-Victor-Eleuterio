@@ -7,7 +7,7 @@ export default function Header2 (props) {
       <div>
         <button
         onClick={props.mudarTela}
-        >Ir para Perfis</button>
+        >🔎</button>
       </div>
     </div>
   )

@@ -1,14 +1,20 @@
 import React from 'react'
+import Name from '../../assets/nome.png'
+import { DivPrincipal, ButtonStyled } from './styled'
 
 export default function Header2 (props) {
   return (
-    <div>
-      <div><h1>Astromatch</h1></div>
+    <DivPrincipal>
       <div>
-        <button
-        onClick={props.mudarTela}
-        >🔎</button>
+      <img 
+        src={Name}
+        />
       </div>
-    </div>
+      <div>
+        <ButtonStyled
+        onClick={props.mudarTela}
+        >🔎</ButtonStyled>
+      </div>
+    </DivPrincipal>
   )
 }

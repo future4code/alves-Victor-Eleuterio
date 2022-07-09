@@ -1,6 +1,6 @@
 import React from 'react'
 import Name from '../../assets/nome.png'
-import { DivPrincipal } from './styled'
+import { DivPrincipal, ButtonStyled } from './styled'
 
 export default function Header(props) {
   return (
@@ -11,9 +11,9 @@ export default function Header(props) {
         />
       </div>
       <div>
-        <button
+        <ButtonStyled
           onClick={props.mudarTela}
-        >💕</button>
+        >💕</ButtonStyled>
       </div>
     </DivPrincipal>
   )

@@ -2,6 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import {DivPrincipal, DivPerfil, DivImg, Img} from './styled'
 
 export default function Matches() {
     const [matches, setMatches] = useState([])
@@ -21,20 +22,22 @@ export default function Matches() {
         })
     }
     return (
-        <div>
-            Matches
+        <DivPrincipal>
             {matches.map((match) => {
                 return (
-                    <div key={match.id}>
-                        <img
-                            width='50px'
-                            height='50px'
+                    <DivPerfil key={match.id}>
+                        <DivImg>
+                        <Img
+
                             src={match.photo}
                         />
+                        </DivImg>
+                        <div>
                         {match.name}
-                    </div>
+                        </div>
+                    </DivPerfil>
                 )
             })}
-        </div>
+        </DivPrincipal>
     )
 }

@@ -3,7 +3,9 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { URL } from '../../contants/contants'
-import { ImgPerfil, DivImg, DivNome, DivBio, BotaoLike, BotaoDislike, DivPerfil, DivPrincipal, DivBotoes } from './styled'
+import { DivInfo,DivIcon, ImgPerfil, DivImg, DivNome, DivBio, BotaoLike, BotaoDislike, DivPerfil, DivPrincipal, DivBotoes } from './styled'
+import Swal from 'sweetalert2'
+import { Icon } from '@material-ui/core'
 
 export default function Perfil() {
     const [perfil, setPerfil] = useState({})
@@ -35,7 +37,11 @@ export default function Perfil() {
         }
         ).then((resposta) => {
             if (resposta.data.isMatch) {
-                alert("Deu match!")
+                Swal.fire({
+                    title:"Deu Match 💕",
+                    text:"Verifique seus matches",
+                    icon: 'info'
+                })
             }
             GetProfileToChoose()
         }).catch((erro) => {
@@ -63,10 +69,20 @@ export default function Perfil() {
                         />
                     </DivImg>
                     <DivNome>
-                        <h4>{perfil.name}, {perfil.age}</h4>
+                        <DivIcon>
+                            🆔
+                        </DivIcon>
+                        <DivInfo>
+                            <h4> {perfil.name}, {perfil.age}</h4>
+                        </DivInfo>
                     </DivNome>
                     <DivBio>
-                        <h5>{perfil.bio}</h5>
+                        <DivIcon>
+                            💬
+                        </DivIcon>
+                        <DivInfo>
+                            <h5> {perfil.bio}</h5>
+                        </DivInfo>
                     </DivBio>
                     <DivBotoes>
                         <div>

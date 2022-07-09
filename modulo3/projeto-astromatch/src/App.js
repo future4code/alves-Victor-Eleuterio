@@ -19,7 +19,7 @@ const DivPrincipal = styled.div`
   background-color: #dec8e798;
   width: 370px;
   height: 550px;
-  padding: 20px;
+  padding: 10px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 `
 

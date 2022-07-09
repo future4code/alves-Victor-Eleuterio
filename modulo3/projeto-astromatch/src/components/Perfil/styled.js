@@ -15,26 +15,43 @@ export const DivImg = styled.div`
     height: 250px;
 `
 export const ImgPerfil = styled.img`
-    border-top-left-radius: 10px;   
-    border-top-right-radius: 10px;   
     width: 100%;
     height:100%;
+    border-top: solid gray 1px;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
 `
 export const DivNome = styled.div`
-    display: flex;
-    text-align: center;
-    background-color: #6ff5e490;
+    display: grid;
+    grid-template-columns: 10% 90%;
+    align-items: center;
+    background-color: white;
     width: 100%;
+    height: 45px;
+    border-bottom: solid gray 1px;
+`
+export const DivIcon = styled.div`
+    padding: 10px;
+`
+export const DivInfo = styled.div`
+    padding-left: 10px;
 `
 export const DivBio = styled.div`
-    background-color: #6ff5e490;
+    display: grid;
+    grid-template-columns: 10% 90%;
+    align-items: center;
+    background-color: white;
     width: 100%;
-    margin-bottom: 20px;
+    height: 59px;
+    margin-bottom: 10px;
     border-bottom-left-radius: 10px;   
     border-bottom-right-radius: 10px;
+
 `
 export const DivBotoes = styled.div`
     display: grid;
+    position: fixed;
+    bottom: 20px;
     grid-template-columns: 50% 50%;
     gap: 10px;
     width: 100%;
@@ -42,7 +59,8 @@ export const DivBotoes = styled.div`
 `
 
 export const BotaoLike = styled.button`
-align-self: center;
+    position: static;
+    align-self: center;
     border-radius: 50%;
     position: static;
     padding: 23px;
@@ -50,10 +68,10 @@ align-self: center;
     background-color: #52b8ab;
     font-size: 20px;
     transition: 0.3s;
+    cursor: pointer;
     &:hover {
         transition: 0.3s;
         background-color: #6ff5e4;
-        padding: 26px;
         box-shadow: 1px 1px 6px black;
     };
     &:active {
@@ -68,10 +86,10 @@ export const BotaoDislike = styled.button`
     background-color: #811cb8;
     font-size: 20px;
     transition: 0.3s;
+    cursor: pointer;
     &:hover {
         background-color: #b128fc;
         transition: 0.3s;
-        padding: 26px;
         box-shadow: -1px 1px 6px black;
     };
     &:active {

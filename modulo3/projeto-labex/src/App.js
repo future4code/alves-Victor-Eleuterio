@@ -1,10 +1,9 @@
-import HomePage from "./pages/HomePage/HomePage";
-import LoginPage from "./pages/LoginPage/LoginPage"
+import Router from "./routes/Router";
 
 function App() {
   return (
   <div>
-    <LoginPage />
+    <Router />
   </div>
   );
 }

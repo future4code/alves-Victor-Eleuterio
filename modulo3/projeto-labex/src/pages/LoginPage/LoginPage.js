@@ -1,31 +1,41 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { GoBack, ChangePage } from '../../routes/Coordinator'
+import { MainDiv, SecondaryDiv, FormDiv, ImageDiv, CopyrightDiv, ButtonStyled, IputStyled } from './Styled'
+import Logo from '../../assets/logo.png'
 
-export default function
-    () {
+export default function () {
+    const navigate = useNavigate()
+
     return (
-        <div>
-            <div>
-                <div>
+        <MainDiv>
+            <SecondaryDiv>
+                <FormDiv>
                     <h4>Login</h4>
-                    <input
+                    <IputStyled
                         placeholder='E-mail:'
                     />
-                    <input
+                    <IputStyled
                         placeholder='Senha:'
                         type="password"
                     />
-                    <button>Voltar</button>
-                    <button>Entrar</button>
-                </div>
-                <div>
-                    <h1>Nome da Empresa</h1>
+                    <ButtonStyled
+                        onClick={() => GoBack(navigate)}
+                    >Voltar</ButtonStyled>
+                    <ButtonStyled
+                    >Entrar</ButtonStyled>
+                </FormDiv>
+                <ImageDiv>
+                    <img
+                        src={Logo}
+                        alt="Logo da empresa"
+                    />
                     <h3>Encontre as melhores <br /> viagens espaciais</h3>
-                </div>
-            </div>
-            <div>
-                <p>Nome da empresa</p>
-                <p>Copyright © 2022 nome da empresa - Todos os direitos reservados</p>
-            </div>
-        </div>
+                </ImageDiv>
+            </SecondaryDiv>
+            <CopyrightDiv>
+                <p>Copyright © 2022 IntoSpace - Todos os direitos reservados</p>
+            </CopyrightDiv>
+        </MainDiv>
     )
 }

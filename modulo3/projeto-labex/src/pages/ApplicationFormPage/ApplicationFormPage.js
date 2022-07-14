@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { GoBack, ChangePage } from '../../routes/Coordinator'
+import { GoBack } from '../../routes/Coordinator'
 
 export default function ApplicationFormPage() {
+  const [trip, setTrip] = useState()
+
   const navigate = useNavigate()
   return (
     <div>
@@ -23,29 +25,36 @@ export default function ApplicationFormPage() {
         </div>
         <div>
           <h2>Inscreva-se para uma viagem</h2>
-          <select>
-            <option>Escolha uma viagem</option>
-          </select>
-          <input
-            placeholder='Nome:'
-          />
-          <input
-            placeholder='Idade:'
-          />
-          <input
-            placeholder='Texto de Candidatura:'
-          />
-          <input
-            placeholder='Profissão:'
-          />
-          <select>
-            <option>Escolha um país</option>
-          </select>
-          <div>
-          <button
-            onClick={() => GoBack(navigate)}
-          >Voltar</button>
+          <form>
+            <select required>
+              <option value disabled selected>Escolha uma viagem</option>
+            </select>
+            <input
+              placeholder='Nome:'
+              type='text'
+              pattern='3+'
+              title='• Ter no mínimo 3 letras'
+            />
+            <input
+              placeholder='Idade:'
+              type='number'
+              minLength='18'
+            />
+            <input
+              placeholder='Texto de Candidatura:'
+            />
+            <input
+              placeholder='Profissão:'
+            />
+            <select>
+              <option>Escolha um país</option>
+            </select>
             <button>Enviar</button>
+          </form>
+          <div>
+            <button
+              onClick={() => GoBack(navigate)}
+            >Voltar</button>
           </div>
         </div>
       </div>

@@ -1,30 +1,63 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { GoBack, ChangePage } from '../../routes/Coordinator'
-import { MainDiv, SecondaryDiv, FormDiv, ImageDiv, CopyrightDiv, ButtonStyled, IputStyled } from './Styled'
+import { GoBack } from '../../routes/Coordinator'
+import { MainDiv, SecondaryDiv, ThirdDiv, FormStyled, ImageDiv, CopyrightDiv, ButtonStyled, InputStyled } from './Styled'
 import Logo from '../../assets/logo.png'
+import axios from 'axios'
+import { BaseUrl } from '../../constants/Constants'
 
-export default function () {
+export default function Login () {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
     const navigate = useNavigate()
+
+    const onChangeEmail = (event) => {
+        setEmail(event.target.value)
+    }
+    const onChangePassword = (event) => {
+        setPassword(event.target.value)
+    }
+    const onSubmitLogin = (event) => {
+        event.preventDefault()
+        const body = {
+            "email": email,
+            "password": password
+        }
+        axios.post(
+            `${BaseUrl}/login`, body
+        ).then((res) => {
+            localStorage.setItem('token', res.data.token)
+            navigate('/admin/trips/list')
+        }).catch((err) => {
+            alert(err.response.data.message)
+        })
+    }
 
     return (
         <MainDiv>
             <SecondaryDiv>
-                <FormDiv>
-                    <h4>Login</h4>
-                    <IputStyled
-                        placeholder='E-mail:'
-                    />
-                    <IputStyled
-                        placeholder='Senha:'
-                        type="password"
-                    />
+                <ThirdDiv>
+                    <FormStyled onSubmit={onSubmitLogin}>
+                        <h4>Login</h4>
+                        <InputStyled
+                            placeholder='E-mail:'
+                            type='email'
+                            onChange={onChangeEmail}
+                            required
+                        />
+                        <InputStyled
+                            placeholder='Senha:'
+                            type="password"
+                            onChange={onChangePassword}
+                            required
+                        />
+                        <ButtonStyled>Entrar</ButtonStyled>
+                    </FormStyled>
                     <ButtonStyled
                         onClick={() => GoBack(navigate)}
                     >Voltar</ButtonStyled>
-                    <ButtonStyled
-                    >Entrar</ButtonStyled>
-                </FormDiv>
+                </ThirdDiv>
                 <ImageDiv>
                     <img
                         src={Logo}

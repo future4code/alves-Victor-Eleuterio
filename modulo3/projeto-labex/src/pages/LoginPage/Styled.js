@@ -15,7 +15,14 @@ export const SecondaryDiv = styled.div`
     height: 95vh;
     width: 100%;
 `
-export const FormDiv = styled.div`
+export const ThirdDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+`
+export const FormStyled = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -27,7 +34,7 @@ export const FormDiv = styled.div`
         font-size: 20px;
     }
 `
-export const IputStyled = styled.input`
+export const InputStyled = styled.input`
     color: white;
     width: 260px;
     padding: 10px;

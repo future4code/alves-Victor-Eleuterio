@@ -1,7 +1,7 @@
 //others
 import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { GoBack, GoToListTrips } from '../../routes/Coordinator'
+import { GoBack, GoToListTrips, GoContact } from '../../routes/Coordinator'
 import ApplicationFormPage from '../ApplicationFormPage/ApplicationFormPage'
 import axios from 'axios'
 import { useEffect } from 'react'
@@ -17,7 +17,8 @@ import Vênus from '../../assets/venus.jpg'
 import Urano from '../../assets/urano.jpg'
 import Desconhecido from '../../assets/desconhecido.jpg'
 //styled
-import { MainDiv, SecondaryDiv, PlanetsDiv, PlanetDiv, InfoDiv, ImgStyled } from './Styled'
+import { MainDiv, SecondaryDiv, PlanetsDiv, PlanetDiv, ButtonsDiv, ButtonStyled, InfoDiv, ImgStyled } from './Styled'
+import Header from '../../components/Header/Header'
 
 export default function ListTripsPage() {
   const [trips, setTrips] = useState([])
@@ -51,7 +52,6 @@ export default function ListTripsPage() {
         return Desconhecido
     }
   }
-
   const GetTrips = () => {
     axios.get(
       `${BaseUrl}/trips`
@@ -89,15 +89,16 @@ export default function ListTripsPage() {
                 )
               })}
             </PlanetsDiv>
-            <div>
-              <button
+            <ButtonsDiv>
+              <ButtonStyled
                 onClick={() => GoToListTrips(navigate, 'application')}
-              >Inscreva-se</button>
-              <button>Contato</button>
-              <button
+              >Inscreva-se</ButtonStyled>
+              <ButtonStyled
+              ><a target='_blank' href='https://web.whatsapp.com/'>Contato</a></ButtonStyled>
+              <ButtonStyled
                 onClick={() => GoBack(navigate)}
-              >Voltar</button>
-            </div>
+              >Voltar</ButtonStyled>
+            </ButtonsDiv>
           </SecondaryDiv>
         )
       case 'application':
@@ -106,6 +107,7 @@ export default function ListTripsPage() {
   }
   return (
     <MainDiv>
+      <Header />
       {ChoosePage()}
     </MainDiv>
   )

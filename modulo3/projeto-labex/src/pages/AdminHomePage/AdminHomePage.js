@@ -7,6 +7,9 @@ import TripDetailsPage from '../TripDetailsPage/TripDetailsPage'
 import axios from 'axios'
 import { useState } from 'react'
 import { token } from '../../constants/Constants'
+//styled
+import { TripDiv, TripsDiv, MainDiv, ButtonsDiv, ButtonStyled, NameDiv } from './styled'
+import Header from '../../components/Header/Header'
 
 export default function AdminHomePage() {
   const [trips, setTrips] = useState([])
@@ -41,11 +44,11 @@ export default function AdminHomePage() {
         auth: token
       }
     }
-    ).then(()=>{
+    ).then(() => {
       alert('Viagem deletada com sucesso!')
       setAuth(!auth)
-    }).catch((error)=>{
-      console.log(error.response)
+    }).catch((error) => {
+      alert(error.response)
     })
   }
 
@@ -54,35 +57,35 @@ export default function AdminHomePage() {
     switch (params.address) {
       case 'list':
         return (
-          <div>
-            <div>
+          <MainDiv>
+            <TripsDiv>
               <h2>Painel Administrativo</h2>
               {trips.map((trip) => {
                 return (
-                  <div key={trip.id}
-                    onClick={() => GoToAdmPage(navigate, trip.id)}
-                  >
-                    <p>{trip.name}</p>
+                  <TripDiv key={trip.id}>
+                    <NameDiv onClick={() => GoToAdmPage(navigate, trip.id)}>
+                      <p>{trip.name}</p>
+                    </NameDiv>
                     <button
-                    onClick={()=>deleteTrip(trip.id)}
+                      onClick={() => deleteTrip(trip.id)}
                     >Deletar</button>
-                  </div>
+                  </TripDiv>
                 )
               })
               }
-            </div>
-            <div>
-              <button
+            </TripsDiv>
+            <ButtonsDiv>
+              <ButtonStyled
                 onClick={() => GoBack(navigate)}
-              >Voltar</button>
-              <button
+              >Voltar</ButtonStyled>
+              <ButtonStyled
                 onClick={() => GoToAdmPage(navigate, 'create')}
-              >Criar Viagem</button>
-              <button
+              >Criar Viagem</ButtonStyled>
+              <ButtonStyled
                 onClick={logout}
-              >Logout</button>
-            </div>
-          </div>
+              >Logout</ButtonStyled>
+            </ButtonsDiv>
+          </MainDiv>
         )
       case 'create':
         return <CreateTripPage />
@@ -96,6 +99,7 @@ export default function AdminHomePage() {
 
   return (
     <div>
+      <Header />
       {ChoosePage()}
     </div>
   )

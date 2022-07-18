@@ -4,6 +4,7 @@ import { authenticate, BaseUrl, headers } from '../../constants/Constants'
 import { GoBack } from '../../routes/Coordinator'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import { MainDiv, SecundaryDiv, TripDiv, ButtonStyled, ButtonDecision, PendingDiv, ApprovedDiv, DivCandidate } from './Styled'
 
 export default function TripDetailsPage() {
   const [tripDetails, setTripDetails] = useState({})
@@ -31,7 +32,7 @@ export default function TripDetailsPage() {
       setCandidates(response.data.trip.candidates)
       setApproveds(response.data.trip.approved)
     }).catch((error) => {
-      console.log(error.response.data.message)
+      alert(error.response.data.message)
     })
   })
 
@@ -48,62 +49,62 @@ export default function TripDetailsPage() {
         }
       }
     ).then((response) => {
-      alert('Candidato decidido')
+
     }).catch((error) => {
-      alert("deu erro")
-      console.log(error.response)
+      alert("Algo deu errado", error.response)
+
     })
   }
   return (
-    <div>
-      <div>
-        <div>
+    <MainDiv>
+      <SecundaryDiv>
+        <TripDiv>
           <h1>{trip.name}</h1>
           <p><b>Descrição:</b> {trip.description}</p>
-          <p><b>Planeta:</b>{trip.planet}</p>
-          <p><b>Duração:</b>{trip.durationInDays}</p>
-          <p><b>Data:</b>{trip.date}</p>
-          <button
+          <p><b>Planeta:</b> {trip.planet}</p>
+          <p><b>Duração:</b> {trip.durationInDays}</p>
+          <p><b>Data:</b> {trip.date}</p>
+          <ButtonStyled
             onClick={() => GoBack(navigate)}
-          >Voltar</button>
-        </div>
-        <div>
+          >Voltar</ButtonStyled>
+        </TripDiv>
+        <PendingDiv>
           <h1>Candidatos Pendentes</h1>
           {candidates.map((candidate) => {
             return (
-              <div key={candidate.id}>
-                <p>Nome: {candidate.name}</p>
-                <p>Idade: {candidate.age}</p>
-                <p>Profissão: {candidate.profession}</p>
-                <p>País: {candidate.country}</p>
-                <p>Texto de candidatura: {candidate.applicationText}</p>
+              <DivCandidate key={candidate.id}>
+                <p><b>Nome:</b> {candidate.name}</p>
+                <p><b>Idade:</b> {candidate.age}</p>
+                <p><b>Profissão:</b> {candidate.profession}</p>
+                <p><b>País:</b> {candidate.country}</p>
+                <p><b>Texto de candidatura:</b> {candidate.applicationText}</p>
                 <div>
-                  <button
+                  <ButtonDecision
                     onClick={() => decideCandidate(candidate.id, true)}
-                  >Aprovar</button>
-                  <button
+                  >Aprovar</ButtonDecision>
+                  <ButtonDecision
                     onClick={() => decideCandidate(candidate.id, false)}
-                  >Reprovar</button>
+                  >Reprovar</ButtonDecision>
                 </div>
-              </div>
+              </DivCandidate>
             )
           })}
-        </div>
-        <div>
+        </PendingDiv>
+        <ApprovedDiv>
           <h1>Candidatos Aprovados</h1>
           {approveds.map((approved) => {
             return (
-              <div key={approved.id}>
-                <p>Nome: {approved.name}</p>
-                <p>Idade: {approved.age}</p>
-                <p>Profissão: {approved.profession}</p>
-                <p>País: {approved.country}</p>
-                <p>Texto de candidatura: {approved.applicationText}</p>
-              </div>
+              <DivCandidate key={approved.id}>
+                <p><b>Nome:</b> {approved.name}</p>
+                <p><b>Idade:</b> {approved.age}</p>
+                <p><b>Profissão:</b> {approved.profession}</p>
+                <p><b>País:</b> {approved.country}</p>
+                <p><b>Texto de candidatura:</b> {approved.applicationText}</p>
+              </DivCandidate>
             )
           })}
-        </div>
-      </div>
-    </div>
+        </ApprovedDiv>
+      </SecundaryDiv>
+    </MainDiv>
   )
 }

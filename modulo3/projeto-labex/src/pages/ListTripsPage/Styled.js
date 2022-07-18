@@ -9,16 +9,15 @@ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubun
 `
 export const SecondaryDiv = styled.div`
     display: grid;
-    grid-template-columns: 85% 15%;
-    height: 95vh;
-    width: 100%;
+    grid-template-columns: 85% 5%;
+    width: 98%;
+    padding: 10px;
 `
 export const PlanetsDiv = styled.div`
     display: grid;
     grid-template-columns: 50% 50%;
-    height: 85vh;
     overflow: hidden;
-    gap: 20px;
+    gap: 12px;
 `
 export const PlanetDiv = styled.div`
     display: flex;
@@ -52,5 +51,40 @@ export const InfoDiv = styled.div`
     }
     b{
         color: #4901ac
+    }
+`
+export const ButtonsDiv = styled.div`
+    display: flex;
+    position: fixed;
+    margin-top: 5%;
+    margin-left: 87%;
+    align-items: center;
+    flex-direction: column;
+    gap: 150px;
+`
+export const ButtonStyled = styled.button`
+    padding: 15px;
+    width: 200px;
+    border-radius: 40px;
+    border: 0;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #e3d6fb;
+    transition: 0.3s;
+    color: #4901ac;
+    a{
+        text-decoration: none;
+        color: #4901ac;
+    }
+    &:hover{
+        background-color: #ceb9f5;
+        transition: 0.3s;
+        box-shadow: 0 0 0.4em #d9c6fc;
+    };
+    &:active{
+        background-color: #b599eb;
+        box-shadow: inset 3px 2px 1px black;
+        font-size: 18px;
+        padding: 16px;
     }
 `

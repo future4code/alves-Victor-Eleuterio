@@ -1,22 +1,31 @@
 import React from 'react'
-import { MainDiv } from './Styled'
+import { ButtonDiv, ButtonsDiv, MainDiv } from './Styled'
 
 export default function Post(props) {
-  return (
-    <MainDiv>
-        <div>
-            <p>Enviado por: {props.user}</p>
-        </div>
-        <div>
-            <h4>
-                {props.textPost}
-                ado ado ado
-            </h4>
-        </div>
-        <div>
-            <button>Seta pra cima e pra baixo</button>
-            <button>Comentarios</button>
-        </div>
-    </MainDiv>
-  )
+    return (
+        <MainDiv>
+            <div>
+                <p>Enviado por: {props.user}</p>
+            </div>
+            <div>
+                <h4>
+                    {props.textPost}
+                    ado ado ado
+                </h4>
+            </div>
+            <ButtonsDiv>
+                <ButtonDiv>
+                    <button>⬆</button>
+                    {props.votes}
+                    <button>⬇</button>
+                </ButtonDiv>
+                <ButtonDiv>
+                    <button
+                    onClick={props.getComments}
+                    >💬</button>
+                    {props.comments}
+                </ButtonDiv>
+            </ButtonsDiv>
+        </MainDiv>
+    )
 }

@@ -1,0 +1,1 @@
+export const BaseUrl = 'https://labeddit-2.herokuapp.com'

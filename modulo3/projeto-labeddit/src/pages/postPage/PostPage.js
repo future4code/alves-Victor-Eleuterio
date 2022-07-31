@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from '../../components/header/Header'
 import { ButtonAuthentication, CloseIcon } from '../../components/header/Styled'
@@ -12,9 +12,16 @@ import { BaseUrl } from '../../constants/urls'
 import { token } from '../../constants/constants'
 
 export default function PostPage() {
-  const { authentication, setAuthentication, comments, posts, postId } = useContext(GlobalContext)
+  const { authentication, setAuthentication, comments, posts, setPostId, postId } = useContext(GlobalContext)
   const [comment, setComment] = useState()
+  const [vote, setVote] = useState(false)
   const navigate = useNavigate()
+
+  console.log(posts)
+
+  useEffect(()=>{
+    setPostId(localStorage.getItem('postId'))
+  },[])
 
   const logout = () => {
     localStorage.removeItem('token')
@@ -55,6 +62,9 @@ export default function PostPage() {
                 user={comment.username}
                 textPost={comment.body}
                 votes={comment.voteSum}
+                voteUp={() => createPostVote(comment.id)}
+                voteDown={() => changePostVote(comment.id)}
+
               />
             )
           })
@@ -81,6 +91,67 @@ export default function PostPage() {
     }).catch((error) => {
       console.log(error)
     })
+  }
+  const createPostVote = (id) => {
+    if (vote == false) {
+      const body = {
+        "direction": 1
+      }
+      axios.post(
+        `${BaseUrl}/posts/${id}/votes`, body, {
+        headers: {
+          "Authorization": token
+        }
+      }
+      ).then((response) => {
+        setVote(true)
+      }).catch((error) => {
+        alert(error)
+      })
+    } else {
+      axios.delete(
+        `${BaseUrl}/posts/${id}/votes`, {
+        headers: {
+          "Authorization": token
+        }
+      }
+      ).then((response) => {
+        setVote(false)
+      }).catch((error) => {
+        alert(error)
+      })
+    }
+  }
+  const changePostVote = (id) => {
+    const body = {
+      "direction": -1
+    }
+    if (vote == false) {
+      axios.put(
+        `${BaseUrl}/posts/${id}/votes`, body, {
+        headers: {
+          "Authorization": token
+        }
+      }
+      ).then((response) => {
+        setVote(true)
+      }).catch((error) => {
+        alert(error)
+      })
+    } else {
+      axios.delete(
+        `${BaseUrl}/posts/${id}/votes`, {
+        headers: {
+          "Authorization": token
+        }
+      }
+      ).then((response) => {
+        alert(response)
+        setVote(false)
+      }).catch((error) => {
+        alert(error)
+      })
+    }
   }
   return (
     <MainDiv>

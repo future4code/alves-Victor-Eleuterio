@@ -15,6 +15,7 @@ import commentIcon from '../../assets/commentIcon.png'
 export default function Feed() {
   const { authentication, setAuthentication, comments, setComments, posts, setPosts, postId, setPostId } = useContext(GlobalContext)
   const [postText, setPostText] = useState()
+  const [vote, setVote] = useState(false)
 
   const navigate = useNavigate()
   const token = localStorage.getItem('token')
@@ -53,10 +54,12 @@ export default function Feed() {
     }
     ).then((response) => {
       setComments(response.data)
+      JSON.stringify(localStorage.setItem('comments', response.data))
       setPostId(id)
       goToPostPage(navigate, id)
+      localStorage.setItem('postId', id)
     }).catch((error) => {
-      console.log(error)
+      alert(error)
       alert("Ocorreu um erro. Tente novamente mais tarde!", error.response.data)
     })
   }
@@ -85,7 +88,67 @@ export default function Feed() {
     })
   }
 
-
+  const createPostVote = (id) => {
+    if (vote == false) {
+      const body = {
+        "direction": 1
+      }
+      axios.post(
+        `${BaseUrl}/posts/${id}/votes`, body, {
+        headers: {
+          "Authorization": token
+        }
+      }
+      ).then((response) => {
+        setVote(true)
+      }).catch((error) => {
+        alert(error)
+      })
+    } else {
+      axios.delete(
+        `${BaseUrl}/posts/${id}/votes`, {
+        headers: {
+          "Authorization": token
+        }
+      }
+      ).then((response) => {
+        setVote(false)
+      }).catch((error) => {
+        alert(error)
+      })
+    }
+  }
+  const changePostVote = (id) => {
+    const body = {
+      "direction": -1
+    }
+    if (vote == false) {
+      axios.put(
+        `${BaseUrl}/posts/${id}/votes`, body, {
+        headers: {
+          "Authorization": token
+        }
+      }
+      ).then((response) => {
+        setVote(true)
+      }).catch((error) => {
+        alert(error)
+      })
+    } else {
+      axios.delete(
+        `${BaseUrl}/posts/${id}/votes`, {
+        headers: {
+          "Authorization": token
+        }
+      }
+      ).then((response) => {
+        alert(response)
+        setVote(false)
+      }).catch((error) => {
+        alert(error)
+      })
+    }
+  }
   const chooseScreen = () => {
     switch (posts) {
       case undefined:
@@ -100,7 +163,8 @@ export default function Feed() {
                 textPost={post.body}
                 votes={post.voteSum}
                 comments={post.commentCount}
-                vote={post.id}
+                voteUp={() => createPostVote(post.id)}
+                voteDown={() => changePostVote(post.id)}
                 buttonComments={
                   <button
                     onClick={() => getPostsComments(post.id)}

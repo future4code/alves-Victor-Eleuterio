@@ -4,7 +4,7 @@ export const MainDiv = styled.div`
     display: grid;
     justify-content: center;
     justify-content: center;
-    width: 100vw;
+    width: 95vw;
     margin-top: 50px;
 `
 export const FormDiv = styled.div`

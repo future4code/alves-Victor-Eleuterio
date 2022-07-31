@@ -6,88 +6,8 @@ import axios from 'axios'
 import { BaseUrl } from '../../constants/urls'
 
 export default function Post(props) {
-    const [vote, setVote] = useState(false)
-
     const token = localStorage.getItem('token')
 
-    const refresh = () => {
-        axios.get(
-            `${BaseUrl}/posts?page=1&size=10`, {
-            headers: {
-                'Authorization': token
-            }
-        }
-        ).then((response) => {
-            console.log(response)
-        }).catch((error) => {
-            console.log(error)
-        })
-    }
-
-    const createPostVote = (id) => {
-        if (vote == false) {
-            const body = {
-                "direction": 1
-            }
-            axios.post(
-                `${BaseUrl}/posts/${id}/votes`, body, {
-                headers: {
-                    "Authorization": token
-                }
-            }
-            ).then((response) => {
-                refresh()
-                setVote(true)
-            }).catch((error) => {
-                console.log(error)
-            })
-        } else {
-            axios.delete(
-                `${BaseUrl}/posts/${id}/votes`, {
-                headers: {
-                    "Authorization": token
-                }
-            }
-            ).then((response) => {
-                setVote(false)
-                refresh()
-            }).catch((error) => {
-                console.log(error)
-            })
-        }
-    }
-    const changePostVote = (id) => {
-        const body = {
-            "direction": -1
-        }
-        if (vote == false) {
-            axios.put(
-                `${BaseUrl}/posts/${id}/votes`, body, {
-                headers: {
-                    "Authorization": token
-                }
-            }
-            ).then((response) => {
-                setVote(true)
-                console.log(response)
-            }).catch((error) => {
-                console.log(error)
-            })
-        } else {
-            axios.delete(
-                `${BaseUrl}/posts/${id}/votes`, {
-                headers: {
-                    "Authorization": token
-                }
-            }
-            ).then((response) => {
-                console.log(response)
-                setVote(false)
-            }).catch((error) => {
-                console.log(error)
-            })
-        }
-    }
     const chooseDiv = () => {
         if (props.buttonComments || props.comments) {
             return (
@@ -111,12 +31,12 @@ export default function Post(props) {
             <ButtonsDiv>
                 <ButtonDiv>
                     <button
-                        onClick={() => createPostVote(props.vote)}
+                        onClick={props.voteUp}
                     ><img src={arrowUp} alt="vote +" />
                     </button>
                     {props.votes}
                     <button
-                        onClick={() => changePostVote(props.vote)}
+                        onClick={props.voteDown}
                     ><img src={arrowDown} alt="vote -" /></button>
                 </ButtonDiv>
                 {chooseDiv()}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { MainDiv } from './Styled'
+import { LogoImg, MainDiv } from './Styled'
 import logo from '../../assets/logo.png'
 
 
@@ -10,7 +10,7 @@ export default function Header(props) {
         {props.buttonClose}
       </div>
       <div>
-        <img src={logo} alt='logo' />
+        <LogoImg src={logo} alt='logo' />
       </div>
       <div>
         {props.buttonAuthentication}

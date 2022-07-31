@@ -13,12 +13,19 @@ export const MainDiv = styled.div`
     top:0;
     left:0;
 
-    img{
-        position: absolute;
-        top: 10px;
-        left: 45%;
-        right: 50%;
-    }
+`
+export const LogoImg = styled.img`
+    position: absolute;
+    top: 10px;
+    left: 45%;
+    right: 50%;
+`
+export const CloseIcon = styled.img`
+    position: absolute;
+    top: 12px;
+    left: 10%;
+    right: 90%;
+    cursor: pointer;
 `
 export const ButtonAuthentication = styled.button`
     position: absolute;
@@ -30,4 +37,5 @@ export const ButtonAuthentication = styled.button`
     font-size: 18px;
     font: 'Noto Sans';
     color: #4088CB;
+    cursor: pointer;
 `

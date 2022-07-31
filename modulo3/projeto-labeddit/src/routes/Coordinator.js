@@ -1,14 +1,13 @@
 
 export const goToFeed = (navigate) => {
-    console.log(localStorage.getItem('token'))
     if (localStorage.getItem('token') !== null) {
-        navigate('/')
+        navigate('/feed')
     } else {
-        navigate('/login')
+        navigate('/')
     }
 }
 export const goToLogin = (navigate) => {
-    navigate('/login')
+    navigate('/')
 }
 export const goToRegistration = (navigate) => {
     navigate('/registration')
@@ -17,6 +16,6 @@ export const goToPostPage = (navigate, address) => {
     if (localStorage.getItem('token') !== null) {
         navigate(`/postpage/${address}`)
     } else {
-        navigate('/login')
+        navigate('/')
     }
 }

@@ -1,17 +1,26 @@
 import styled from "styled-components";
 
 export const MainDiv = styled.div`
+    display: grid;
     justify-content: center;
-    width: 100vw;
+    width: 95vw;
     margin-top: 50px;
+    @media(min-width: 1000px){
+        overflow: auto;
+        &::-webkit-scrollbar{
+            
+        }
+    }
 `
 export const FormDiv = styled.div`
     padding: 30px;
+    max-width: 600px;
 `
 export const FormStyled = styled.form`
     display: flex;
     flex-direction: column;
     gap: 20px;
+
     textarea{
         padding: 10px;
         align-items: flex-start;
@@ -50,8 +59,12 @@ export const ButtonPost = styled.button`
 
     color: white;
     font-size: 18px;
+    cursor: pointer;
 `
 export const PostDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
     width: 85%;
     padding: 30px;
 `

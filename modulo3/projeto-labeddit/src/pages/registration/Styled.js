@@ -44,6 +44,8 @@ export const FormStyled = styled.form`
         background: linear-gradient(90deg, #FF6489 0%, #F9B24E 100%);
         border-radius: 27px;
         border: 0;
+       cursor: pointer;
+
     }
 `
 export const InfoDiv = styled.div`

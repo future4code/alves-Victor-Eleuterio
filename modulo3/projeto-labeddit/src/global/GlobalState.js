@@ -5,11 +5,20 @@ import { BaseUrl } from '../hooks/useRequestData'
 const Provider = GlobalContext.Provider
 
 export const GlobalState = (props) => {
-    const [authentication, setAuthentication, comments, setComments] = useState(false)
+    const [authentication, setAuthentication,] = useState()
+    const [comments, setComments] = useState()
+    const [posts, setPosts] = useState()
+    const [postId, setPostId] = useState()
 
     const values = {
-        authentication, setAuthentication,
-        comments, setComments
+        authentication,
+        setAuthentication,
+        comments,
+        setComments,
+        posts,
+        setPosts,
+        postId,
+        setPostId
     }
 
     return (

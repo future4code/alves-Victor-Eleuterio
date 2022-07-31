@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
 import logo from '../../assets/logoName.png'
-import { MainDiv, InfoDiv, FormStyled, ButtonsDiv, ButtonContinue, ButtonCreate } from './Styled'
+import { MainDiv, InfoDiv, FormStyled, ButtonsDiv, ButtonContinue, BackgroundImg, ButtonCreate } from './Styled'
 import { goToRegistration, goToFeed } from '../../routes/Coordinator'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { BaseUrl } from '../../constants/urls'
 import { GlobalContext } from '../../global/GlobalContext'
+import backgroundLogin from "../../assets/backgroundLogin.jpg"
+
 
 export default function Login() {
   const { authentication, setAuthentication } = useContext(GlobalContext)
@@ -53,35 +55,35 @@ export default function Login() {
 
   return (
     <MainDiv>
-      <InfoDiv>
-        <img
-          src={logo}
-          alt='logo'
-        />
-        <p>O projeto de rede social da Labenu</p>
-      </InfoDiv>
-      <FormStyled onSubmit={Login}>
-        <input
-          onChange={onChangeEmail}
-          placeholder='E-mail'
-          // type='email'
-          required
-        />
-        <input
-          onChange={onChangePassword}
-          placeholder='Senha'
-          type='password'
-          required
-        />
-        <ButtonsDiv>
-          <ButtonContinue
-          >Continuar</ButtonContinue>
-          <hr />
-          <ButtonCreate
-            onClick={() => goToRegistration(navigate)}
-          ><b>Crie uma conta!</b></ButtonCreate>
-        </ButtonsDiv>
-      </FormStyled>
+        <InfoDiv>
+          <img
+            src={logo}
+            alt='logo'
+          />
+          <p>O projeto de rede social da Labenu</p>
+        </InfoDiv>
+        <FormStyled onSubmit={Login}>
+          <input
+            onChange={onChangeEmail}
+            placeholder='E-mail'
+            type='email'
+            required
+          />
+          <input
+            onChange={onChangePassword}
+            placeholder='Senha'
+            type='password'
+            required
+          />
+          <ButtonsDiv>
+            <ButtonContinue
+            >Continuar</ButtonContinue>
+            <hr />
+            <ButtonCreate
+              onClick={() => goToRegistration(navigate)}
+            ><b>Crie uma conta!</b></ButtonCreate>
+          </ButtonsDiv>
+        </FormStyled>
     </MainDiv>
   )
 }

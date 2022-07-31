@@ -10,10 +10,11 @@ import { goToFeed, goToPostPage } from '../../routes/Coordinator'
 import useRequestData from '../../hooks/useRequestData'
 import { BaseUrl } from '../../constants/urls'
 import axios from 'axios'
+import commentIcon from '../../assets/commentIcon.png'
 
 export default function Feed() {
-  const { authentication, setAuthentication } = useContext(GlobalContext)
-  const [posts, setPosts] = useState()
+  const { authentication, setAuthentication, comments, setComments, posts, setPosts, postId, setPostId } = useContext(GlobalContext)
+  const [postText, setPostText] = useState()
 
   const navigate = useNavigate()
   const token = localStorage.getItem('token')
@@ -25,7 +26,7 @@ export default function Feed() {
 
   const getPosts = () => {
     axios.get(
-      `${BaseUrl}/posts?page=1&size=20`, {
+      `${BaseUrl}/posts?page=1&size=10`, {
       headers: {
         'Authorization': token
       }
@@ -33,8 +34,7 @@ export default function Feed() {
     ).then((response) => {
       setPosts(response.data)
     }).catch((error) => {
-      console.log(error.response.data)
-      alert('Ocorreu um erro. Por favor, faça login novamente')
+      alert('Ocorreu um erro. Por favor, faça login novamente', error.response.data)
     })
   }
 
@@ -52,23 +52,37 @@ export default function Feed() {
       }
     }
     ).then((response) => {
+      setComments(response.data)
+      setPostId(id)
       goToPostPage(navigate, id)
     }).catch((error) => {
       console.log(error)
+      alert("Ocorreu um erro. Tente novamente mais tarde!", error.response.data)
     })
   }
 
-  const onChangePost = () =>{
-    
+  const onChangePost = (event) => {
+    setPostText(event.target.value)
   }
-  const createPost = () => {
+  const createPost = (event) => {
+    event.preventDefault()
+
+    const body = {
+      "title": "comment",
+      "body": postText
+    }
     axios.post(
-      `${BaseUrl}/posts`, {
+      `${BaseUrl}/posts`, body, {
       headers: {
         Authorization: token
       }
     }
-    )
+    ).then((response) => {
+      getPosts()
+      alert(response.data)
+    }).catch((error) => {
+      alert(error)
+    })
   }
 
 
@@ -86,7 +100,12 @@ export default function Feed() {
                 textPost={post.body}
                 votes={post.voteSum}
                 comments={post.commentCount}
-                getComments={() => getPostsComments(post.id)}
+                vote={post.id}
+                buttonComments={
+                  <button
+                    onClick={() => getPostsComments(post.id)}
+                  ><img src={commentIcon} /></button>
+                }
               />
             )
           })
@@ -107,9 +126,13 @@ export default function Feed() {
       <FormDiv>
         <FormStyled >
           <textarea
+            value={postText}
+            onChange={onChangePost}
             placeholder='Escreva seu Post...'
           />
-          <ButtonPost>Postar</ButtonPost>
+          <ButtonPost
+            onClick={createPost}
+          >Postar</ButtonPost>
           <hr />
         </FormStyled>
       </FormDiv>

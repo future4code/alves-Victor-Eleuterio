@@ -8,14 +8,18 @@ export const MainDiv = styled.div`
     gap: 18px;
 
     width: 334px;
-    height: 167px;
     background: #FBFBFB;
     border: 1px solid #E0E0E0;
     border-radius: 12px;
+    position: relative;
+
+    @media (min-width: 660px) {
+        width: 570px;
+        
+    }
 `
 export const ButtonsDiv = styled.div`
-    position: absolute;
-    margin-top: 120px;
+    position: relative;
     display: flex; 
     gap: 20px;
     align-items: center;
@@ -37,5 +41,6 @@ export const ButtonDiv = styled.div`
     button{
         border: 0;
         background-color: transparent;
+        cursor: pointer;
     }
 `

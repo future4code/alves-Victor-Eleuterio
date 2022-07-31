@@ -9,10 +9,10 @@ export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<Feed />} />
-        <Route path='login' element={<Login />} />
+        <Route index element={<Login />} />
+        <Route path='feed' element={<Feed />} />
         <Route path='registration' element={<Registration />} />
-        <Route path='pagepost/:id' element={<PostPage />} />
+        <Route path='postpage/:id' element={<PostPage />} />
       </Routes>
     </BrowserRouter>
   )

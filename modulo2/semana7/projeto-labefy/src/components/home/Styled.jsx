@@ -7,6 +7,8 @@ export const DivPrincipal = styled.div`
     height: 89.8vh;
     `
 export const DivSecundaria = styled.div`
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
     overflow: auto;
 `
 
@@ -79,20 +81,25 @@ export const InputStyled = styled.input`
     border-bottom: solid #ef7c0a 1px;
     outline: none;
     background-color: transparent;
+    color: white;
 `
 export const DivNav = styled.div`
     display: grid;
     gap: 20px;
+    justify-items: center;
     margin-top: 20px;
     margin-left: 10px;
     margin-right: 10px;
+    color: white;
 `
 
 export const AudioStyled = styled.audio`
     width: 100%;
     color: black;
 `
-export const Aviso = styled.div`
+export const DivPlaylistsHome = styled.div`
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
     color: whitesmoke;
     margin-top: 50px;
     text-align: center;

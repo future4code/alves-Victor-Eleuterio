@@ -16,14 +16,16 @@ import { ButtonStyled } from "./Styled";
 import { InputStyled } from "./Styled";
 import { DivNav } from "./Styled";
 import { AudioStyled } from "./Styled";
-import { Aviso } from "./Styled";
+import { DivPlaylistsHome } from "./Styled";
 import { DivMusica } from "./Styled";
 import { DivMusicas } from "./Styled";
+import home from "../../assets/home.png"
 
 
 export default class Home extends Component {
     state = {
         playlists: [],
+        todasPlaylists: [],
         musicas: [],
         tela: "lista",
         telaHome: "home",
@@ -35,7 +37,7 @@ export default class Home extends Component {
         urlPlayer: ''
     }
 
-    componentDidUpdate() {
+    componentDidMount() {
         this.getAllPlaylists()
     }
 
@@ -70,7 +72,7 @@ export default class Home extends Component {
                 }
             }
         ).then((resposta) => {
-            this.setState({ playlists: resposta.data.result.list })
+            this.setState({ playlists: resposta.data.result.list, todasPlaylists: resposta.data.result.list })
         }).catch((erro) => {
             alert('Ocorreu um erro, tente novamente', erro.response.data.message)
         })
@@ -164,6 +166,9 @@ export default class Home extends Component {
         this.setState({ telaHome: "suasPlaylists" })
 
     }
+    listaHome = () => {
+        this.setState({ telaHome: "home" })
+    }
 
 
 
@@ -172,6 +177,11 @@ export default class Home extends Component {
             case "addPlaylist":
                 return (
                     <DivNav>
+                        <img src={home}
+                            width='50px'
+                            alt="home"
+                            onClick={this.listaHome}
+                        />
                         <ButtonStyled
                             onClick={this.botaoVoltar}
                         >Voltar</ButtonStyled>
@@ -188,15 +198,20 @@ export default class Home extends Component {
             case "suasPlaylists":
                 return (
                     <div>
+                        <img src={home}
+                            width='50px'
+                            alt="home"
+                            onClick={this.listaHome}
+                        />
                         <ButtonStyled
                             onClick={this.botaoVoltar}
                         >Voltar</ButtonStyled>
                         <ul>
 
                             {this.state.playlists.map((playlist) => {
-                                return <ButtonStyled
+                                return (<ButtonStyled
                                     onClick={this.imprimirPlaylist}
-                                ><li key={playlist.id}>{playlist.name}</li></ButtonStyled>
+                                ><li key={playlist.id}>{playlist.name}</li></ButtonStyled>)
                             })}
 
                         </ul>
@@ -214,6 +229,11 @@ export default class Home extends Component {
     listaDeOpcoes = () => {
         return (
             <DivNav>
+                <img src={home}
+                    width='50px'
+                    alt="home"
+                    onClick={this.listaHome}
+                />
                 <ButtonStyled
                     onClick={this.listaAddPlaylist}
                 >Adicionar Playlist</ButtonStyled>
@@ -333,24 +353,21 @@ export default class Home extends Component {
                 );
             case "home":
                 return (
-                    <Aviso>
-                        {this.state.musicas.map((musica)=> {
-                            return(
-                                <DivCard key="9de0c1c3-b972-41e9-8e9a-e54c359b9d92">
-                                    <ImgStyled
-                                        src={MusicIcon}
-                                        alt='Imagem da musica/artista'
-                                    />
-                                    <h3>{musica.name}</h3>
-                                    <h4>{musica.artist}</h4>
-                                    <ButtonStyled>Tocar</ButtonStyled>
-                                    <ButtonStyled>Remover Musica</ButtonStyled>
-                                </DivCard>
-                            )
-                        })}
-                        <h1>Página Home em reforma, pedimos desculpas pelo trasntorno 😕</h1>
-                        <h4>Mas você ainda pode usar a ferramenta de adicionar novas playlists e visualiza-las na página Suas Playlists 😉</h4>
-                    </Aviso>
+                    <DivPlaylistsHome>
+                            {this.state.playlists.map((playlist) => {
+                                return (
+                                    <DivCard key={playlist.id}>
+                                        <ImgStyled
+                                            src={MusicIcon}
+                                            alt='Imagem da musica/artista'
+                                        />
+                                        <h3>{playlist.name}</h3>
+                                        <ButtonStyled>Visualizar</ButtonStyled>
+                                    </DivCard>
+                                )
+                            })}
+
+                    </DivPlaylistsHome>
 
                 )
         }

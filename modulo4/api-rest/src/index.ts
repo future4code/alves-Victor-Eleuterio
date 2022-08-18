@@ -46,25 +46,25 @@ app.use(cors())
 
 
 // Ex.3 
-// app.get('/users', (req: Request, res: Response) => {
-//     try {
-//         const name: string = req.query.name as string
-//         if (!name) {
-//             res.send(C.users)
-//         }
+app.get('/users', (req: Request, res: Response) => {
+    try {
+        const name: string = req.query.name as string
+        if (!name) {
+            res.send(C.users)
+        }
 
-//         const user: C.User | undefined = C.users.find((user) => user.name.toUpperCase() === name.toUpperCase())
+        const user: C.User | undefined = C.users.find((user) => user.name.toUpperCase() === name.toUpperCase())
 
-//         if (!user) {
-//             res.statusCode = 404
-//             throw new Error(`User '${name}' not found`)
-//         }
+        if (!user) {
+            res.statusCode = 404
+            throw new Error(`User '${name}' not found`)
+        }
 
-//         res.send(user)
-//     } catch (error) {
-//         res.status(res.statusCode || 500).send({ message: error.message })
-//     }
-// })
+        res.send(user)
+    } catch (error) {
+        res.status(res.statusCode || 500).send({ message: error.message })
+    }
+})
 
 // Ex.4
 app.post("/users", (req: Request, res: Response) => {

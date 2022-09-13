@@ -1,0 +1,21 @@
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+    "email": "victor@labenu.com",
+    "password": "victorlabenu"
+}
+
+###
+
+POST http://localhost:3003/login
+Content-Type: application/json
+
+{
+    "email": "victor@labenu.com",
+    "password": "victorlabenu"
+}
+
+###
+
+GET http://localhost:3003/user/profile

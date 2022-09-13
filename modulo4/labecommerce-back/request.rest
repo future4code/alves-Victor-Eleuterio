@@ -1,0 +1,41 @@
+POST http://localhost:3003/users
+Content-Type: application/json
+
+{
+    "name": "",
+    "email": "",
+    "password": ""
+}
+
+###
+
+GET http://localhost:3003/users
+
+### 
+
+POST http://localhost:3003/products
+Content-Type: application/json
+
+{
+    "name": "Macbook Pro",
+    "price": 10000,
+    "image": "https://www.apple.com/br/newsroom/2021/10/apple-unveils-game-changing-macbook-pro/"
+}
+
+###
+
+GET http://localhost:3003/products
+
+###
+
+POST http://localhost:3003/purchases
+Content-Type: application/json
+
+{
+    "userId": "1662049949261",
+    "productId": "1662060134963",
+    "quantity": 1
+}
+
+###
+
